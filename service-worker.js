@@ -1,22 +1,22 @@
-function forceDark() {
-  // Add the class 'dark' to the body element
-  document.body.classList.add('dark-mode');
+function toggleDark() {
+    // Add the class 'dark' to the body element
+    document.body.classList.add('dark-mode');
 
-  // Replace the 'light-mode' class with 'dark-mode' on the body element
-  document.body.classList.remove('light-mode');
+    // Replace the 'light-mode' class with 'dark-mode' on the body element
+    document.body.classList.remove('light-mode');
 
-  // Fixes the stupidly large logo because he cannot properly style it in CSS
-  const logo = document.querySelector('.dark-landinglogo');
-  if (logo) {
-    logo.style.width = '6rem';
-  }
+    // Fixes the stupidly large logo because he cannot properly style it in CSS
+    const logo = document.querySelector('.dark-landinglogo');
+    if (logo) {
+      logo.style.width = '6rem';
+    }
 }
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
   if (changeInfo.status === 'complete' && (tab.url.includes('mystudentlife') || tab.url.includes('societies') || tab.url.includes('sport'))) {
     chrome.scripting.executeScript({
       target: { tabId: tab.id },
-      function: forceDark
+      function: toggleDark
     }).catch(err => {
       console.error('Failed to execute script:', err.message);
     });
