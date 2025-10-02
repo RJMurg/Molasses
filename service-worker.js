@@ -4,6 +4,12 @@ function forceDark() {
 
   // Replace the 'light-mode' class with 'dark-mode' on the body element
   document.body.classList.remove('light-mode');
+
+  // Fixes the stupidly large logo because he cannot properly style it in CSS
+  const logo = document.querySelector('.dark-landinglogo');
+  if (logo) {
+    logo.style.width = '6rem';
+  }
 }
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
